@@ -4,4 +4,5 @@ Teamwork::Engine.routes.draw do
   resources :tags
   resources :comments
   resources :documents
+  resources :calendars
 end

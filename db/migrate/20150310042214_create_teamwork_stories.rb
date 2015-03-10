@@ -2,7 +2,6 @@ class CreateTeamworkStories < ActiveRecord::Migration
   def change
     create_table :teamwork_stories do |t|
       t.integer :project_id, null: false
-      t.string :uid, null: false, limit: 36
       t.string :title, null: false
       t.text :description, null: false
       t.integer :point, null: false
@@ -18,6 +17,10 @@ class CreateTeamworkStories < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :teamwork_stories, :name
-    add_index :teamwork_stories, :uid, unique: true
+
+    create_table :teamwork_stories_tags, id: false do |t|
+      t.belongs_to :story_id, index: true
+      t.belongs_to :tag_id, index: true
+    end
   end
 end
