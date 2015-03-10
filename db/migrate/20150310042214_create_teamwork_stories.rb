@@ -16,7 +16,8 @@ class CreateTeamworkStories < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :teamwork_stories, :name
+
+    add_index :teamwork_stories, :title
 
     create_table :teamwork_stories_tags, id: false do |t|
       t.belongs_to :story_id, index: true

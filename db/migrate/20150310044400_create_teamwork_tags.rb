@@ -5,7 +5,7 @@ class CreateTeamworkTags < ActiveRecord::Migration
       t.string :name, null: false
       t.timestamps null: false
     end
+    add_index :teamwork_tags, :name
   end
 
-  add_index :teamwork_tags, :name
 end
