@@ -1,3 +1,6 @@
+.idea
 log/*.log
 pkg/
-.idea/
+spec/dummy/log/*.log
+spec/dummy/tmp/
+spec/dummy/.sass-cache
