@@ -1,7 +1,6 @@
 Teamwork::Engine.routes.draw do
 
   get 'home'=>'home#index'
-  get 'controllers'=> 'home#controllers', format: :js
 
   resources :projects
   resources :stories
@@ -10,7 +9,6 @@ Teamwork::Engine.routes.draw do
   resources :documents
   resources :calendars
 
-  get 'excels/controllers', format: :js
   resources :excels do
 
   end

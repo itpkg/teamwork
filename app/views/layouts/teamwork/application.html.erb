@@ -2,7 +2,10 @@
 <html>
 <head>
   <title>Teamwork</title>
-  <%= stylesheet_link_tag    "teamwork/application", media: "all" %>
+  <%= stylesheet_link_tag 'teamwork/application', media: 'all' %>
+  <script type='text/javascript'>
+      var gl_lang = "<%= I18n.locale %>";
+  </script>
   <%= javascript_include_tag "teamwork/application" %>
   <%= csrf_meta_tags %>
 </head>

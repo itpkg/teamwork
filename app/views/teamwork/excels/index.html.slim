@@ -4,5 +4,6 @@ div class='col-lg-10 col-lg-offset-1'
     = f.primary t('buttons.create')
     = f.button t('buttons.search'), class:'btn btn-success'
 |#{t('buttons.search')}
-|#{I18n.locale}
-= javascript_include_tag excels_controllers_path(format: :js)
+
+javascript:
+  var aaa=1;
