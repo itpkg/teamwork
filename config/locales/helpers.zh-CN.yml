@@ -1,4 +1,7 @@
 zh-CN:
+  helpers:
+    xls_file:
+      name: '文件名'
   teamwork:
     helpers:
       project:

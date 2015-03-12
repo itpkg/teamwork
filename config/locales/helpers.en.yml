@@ -1,4 +1,7 @@
 en:
+  helpers:
+    xls_file:
+      name: 'File name'
   teamwork:
     helpers:
       project:
