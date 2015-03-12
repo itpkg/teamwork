@@ -21,3 +21,29 @@ $icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
 label.required:after {
   content: " *";
 }
+
+.glyphicon--navbar {
+  top: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.project-index-title {
+  font-size: 1.4em;
+  font-weight: bolder;
+}
+
+.project-index-show-all {
+  font-size: 0.85em;
+  padding: 5px;
+}
+
+.container--fixed-navbar {
+  margin-top: 70px;
+}
+
+.navbar-nav--narrow {
+  margin: 0;
+}
