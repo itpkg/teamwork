@@ -1,4 +1,5 @@
-require "teamwork/engine"
+require 'teamwork/engine'
 
 module Teamwork
+
 end
