@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <h4>Projects</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><a href="#"><span class="glyphicon glyphicon-plus"></span> Create Project</a></th>
+          <th>Members</th>
+          <th>Stories</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="project in projects">
+          <td><a href="#">{{project.name}}</a></td>
+          <td><a href="#"><span class="glyphicon glyphicon-user"></span> {{project.users}}</a></td>
+          <td><a href="#"><span class="glyphicon glyphicon-folder-close"></span> {{project.users}}</a></td>
+          <td><a href="#">settings</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

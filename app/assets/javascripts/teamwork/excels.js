@@ -10,5 +10,5 @@ angular.module('excelsApp', [])
     });
 $(document).on('ready page:load', function () {
     console.log('init angular app -- excel -- '+gl_lang);
-    angular.bootstrap(document.body, ['excelsApp']);
+    angular.bootstrap(document.body, ['teamworkEngine']);
 });

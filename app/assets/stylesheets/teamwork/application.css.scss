@@ -22,14 +22,6 @@ label.required:after {
   content: " *";
 }
 
-.glyphicon--navbar {
-  top: 0;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .project-index-title {
   font-size: 1.4em;
   font-weight: bolder;
@@ -46,4 +38,10 @@ label.required:after {
 
 .navbar-nav--narrow {
   margin: 0;
+}
+
+.decoration-less-link {
+  &:hover {
+    text-decoration: none;
+  }
 }
