@@ -3,7 +3,7 @@
 var projectControllers = angular.module('projectControllers', []);
 
 projectControllers.controller('ProjectsIndexCtl', ['$scope', '$http',
-  function ($scope, $http) {
+  function ($scope) {
     $scope.projects = [
       {users: 2, stories: 3, description: 'ds: Ruby is awesome!', name: 'Ruby'},
       {users: 2, stories: 3, description: 'ds: Rails is awesome!', name: 'Rails'},
@@ -12,7 +12,7 @@ projectControllers.controller('ProjectsIndexCtl', ['$scope', '$http',
   }]);
 
 projectControllers.controller('ProjectsAllCtl', ['$scope', '$http',
-  function ($scope, $http) {
+  function ($scope) {
     $scope.projects = [
       {users: 2, stories: 3, name: 'Ruby'},
       {users: 2, stories: 3, name: 'Rails'},
