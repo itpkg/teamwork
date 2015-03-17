@@ -1,21 +1,17 @@
 'use strict';
 
-var projectControllers = angular.module('projectControllers', []);
+var projectControllers = angular.module('ProjectControllers', ['ProjectServices']);
 
-projectControllers.controller('ProjectsIndexCtl', ['$scope', '$http',
-  function ($scope) {
-    $scope.projects = [
-      {users: 2, stories: 3, description: 'ds: Ruby is awesome!', name: 'Ruby'},
-      {users: 2, stories: 3, description: 'ds: Rails is awesome!', name: 'Rails'},
-      {users: 2, stories: 3, description: 'ds: JavaScript is awesome!', name: 'JavaScript'}
-    ];
+projectControllers.controller('ProjectsIndexCtl', ['$scope', 'projectFactory',
+  function ($scope, projectFactory) {
+    projectFactory.projects().success(function (data) {
+      $scope.projects = data;
+    });
   }]);
 
-projectControllers.controller('ProjectsAllCtl', ['$scope', '$http',
-  function ($scope) {
-    $scope.projects = [
-      {users: 2, stories: 3, name: 'Ruby'},
-      {users: 2, stories: 3, name: 'Rails'},
-      {users: 2, stories: 3, name: 'JavaScript'}
-    ];
+projectControllers.controller('ProjectsAllCtl', ['$scope', 'projectFactory',
+  function ($scope, projectFactory) {
+    projectFactory.projects().success(function (data) {
+      $scope.projects = data;
+    });
   }]);
