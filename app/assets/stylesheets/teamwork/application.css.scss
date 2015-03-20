@@ -21,3 +21,36 @@ $icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
 label.required:after {
   content: " *";
 }
+
+.error-msg {
+  color: red;
+  padding-top: 5px;
+}
+
+.invalidField {
+  border-color: red;
+}
+
+.project-index-title {
+  font-size: 1.4em;
+  font-weight: bolder;
+}
+
+.project-index-show-all {
+  font-size: 0.85em;
+  padding: 5px;
+}
+
+.container--fixed-navbar {
+  margin-top: 70px;
+}
+
+.navbar-nav--narrow {
+  margin: 0;
+}
+
+.decoration-less-link {
+  &:hover {
+    text-decoration: none;
+  }
+}

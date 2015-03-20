@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Teamwork</title>
-  <%= stylesheet_link_tag 'teamwork/application', media: 'all' %>
-  <script type='text/javascript'>
-      var gl_lang = "<%= I18n.locale %>";
-  </script>
-  <%= javascript_include_tag "teamwork/application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Teamwork</title>
+    <%= stylesheet_link_tag 'teamwork/application', media: 'all' %>
+    <script type='text/javascript'>
+        var gl_lang = "<%= I18n.locale %>";
+    </script>
+    <%= javascript_include_tag 'teamwork/application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render partial: 'layouts/teamwork/header' %>
 
-<%= yield %>
+    <div class="container-fluid container--fixed-navbar">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div ng-view>
+            <%= yield %>
+          </div>
 
-</body>
+          <%= render partial: 'layouts/teamwork/footer' %>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

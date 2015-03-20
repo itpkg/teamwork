@@ -1,0 +1,21 @@
+'use strict';
+
+<% url_helpers = Teamwork::Engine.routes.url_helpers %>
+
+var projectServices = angular.module('ProjectServices', []);
+
+projectServices.factory('projectFactory', ['$http',
+  function ($http) {
+    var projectFactory = {};
+
+    projectFactory.projects = function () {
+      return $http.get("<%= url_helpers.projects_path(locale: 'en') %>");
+    };
+
+    projectFactory.create_project = function (project) {
+      return $http.post("<%= url_helpers.projects_path(locale: 'en') %>", project);
+    };
+
+    return projectFactory;
+  }
+]);

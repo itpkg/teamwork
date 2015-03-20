@@ -1,0 +1,31 @@
+'use strict';
+
+/* Teamwork Module */
+
+var teamworkEngine = angular.module('teamworkEngine', [
+  'ngRoute',
+
+  'ProjectControllers',
+  'ProjectDirectives',
+  'ProjectServices'
+]);
+
+teamworkEngine.config(['$routeProvider', '$locationProvider',
+  function ($routeProvider) {
+    $routeProvider.
+      when('/projects', {
+        templateUrl: "<%= asset_path('teamwork/projects/projects.html') %> ",
+        controller: 'ProjectsIndexCtl'
+      }).
+      when('/projects-all', {
+        templateUrl: "<%= asset_path('teamwork/projects/projects_all.html') %> ",
+        controller: 'ProjectsAllCtl'
+      }).
+      when('/projects/new', {
+        templateUrl: "<%= asset_path('teamwork/projects/new.html') %> ",
+        controller: 'ProjectsNewCtl'
+      }).
+      otherwise({
+        redirectTo: '/projects'
+      });
+  }]);
