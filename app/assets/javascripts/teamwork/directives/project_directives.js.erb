@@ -5,9 +5,16 @@ var projectDirectives = angular.module('ProjectDirectives', []);
 projectDirectives.directive('projectInfoBlock', function () {
   return {
     restrict: 'AE',
-    templateUrl: "<%= asset_path('teamwork/project_info_block.html') %> ",
+    templateUrl: "<%= asset_path('teamwork/projects/project_info_block.html') %> ",
     link: function (scope, el) {
       el.find('.js-tooltip-el').tooltip();
     }
+  }
+});
+
+projectDirectives.directive('projectForm', function () {
+  return {
+    restrict: 'AE',
+    templateUrl: "<%= asset_path('teamwork/projects/form.html') %> "
   }
 });

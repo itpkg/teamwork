@@ -13,15 +13,19 @@ var teamworkEngine = angular.module('teamworkEngine', [
 teamworkEngine.config(['$routeProvider', '$locationProvider',
   function ($routeProvider) {
     $routeProvider.
-      when('/ng-projects', {
-        templateUrl: "<%= asset_path('teamwork/projects.html') %> ",
+      when('/projects', {
+        templateUrl: "<%= asset_path('teamwork/projects/projects.html') %> ",
         controller: 'ProjectsIndexCtl'
       }).
-      when('/ng-projects-all', {
-        templateUrl: "<%= asset_path('teamwork/projects_all.html') %> ",
+      when('/projects-all', {
+        templateUrl: "<%= asset_path('teamwork/projects/projects_all.html') %> ",
         controller: 'ProjectsAllCtl'
       }).
+      when('/projects/new', {
+        templateUrl: "<%= asset_path('teamwork/projects/new.html') %> ",
+        controller: 'ProjectsNewCtl'
+      }).
       otherwise({
-        redirectTo: '/ng-projects'
+        redirectTo: '/projects'
       });
   }]);

@@ -7,5 +7,20 @@ module Teamwork
 
       render json: projects.map(&:general_info)
     end
+
+    def create
+      if Project.create(project_params)
+        status = :ok
+      else
+        status = :error
+      end
+
+      render json: {status: status}
+    end
+
+    private
+    def project_params
+      params.require(:project).permit(:name, :description)
+    end
   end
 end

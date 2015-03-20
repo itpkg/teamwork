@@ -9,10 +9,11 @@ projectServices.factory('projectFactory', ['$http',
     var projectFactory = {};
 
     projectFactory.projects = function () {
-      return $http({
-        method: 'GET',
-        url: "<%= url_helpers.projects_path(locale: 'en') %>"
-      });
+      return $http.get("<%= url_helpers.projects_path(locale: 'en') %>");
+    };
+
+    projectFactory.create_project = function (project) {
+      return $http.post("<%= url_helpers.projects_path(locale: 'en') %>", project);
     };
 
     return projectFactory;

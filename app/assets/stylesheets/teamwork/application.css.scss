@@ -22,6 +22,15 @@ label.required:after {
   content: " *";
 }
 
+.error-msg {
+  color: red;
+  padding-top: 5px;
+}
+
+.invalidField {
+  border-color: red;
+}
+
 .project-index-title {
   font-size: 1.4em;
   font-weight: bolder;
