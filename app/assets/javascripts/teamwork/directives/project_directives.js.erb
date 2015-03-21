@@ -15,6 +15,105 @@ projectDirectives.directive('projectInfoBlock', function () {
 projectDirectives.directive('projectForm', function () {
   return {
     restrict: 'AE',
-    templateUrl: "<%= asset_path('teamwork/projects/form.html') %> "
+    templateUrl: "<%= asset_path('teamwork/projects/form.html') %>"
+  }
+});
+
+projectDirectives.directive('projectFormFields', function () {
+  return {
+    restrict: 'AE',
+    scope: {project: '=', blank_name: '=blankName'},
+    templateUrl: "<%= asset_path('teamwork/projects/form_fields.html') %>"
+  }
+});
+
+projectDirectives.directive('projectDetailsPanel', function () {
+  return {
+    restrict: 'AE',
+    scope: {project: '=', project_copy: '=projectCopy', update_project: '&updateProject'},
+    templateUrl: "<%= asset_path('teamwork/projects/project_details_panel.html') %>",
+    link: function (scope, el) {
+      el.find('#project_form').on('show.bs.modal', function () {
+        angular.copy(scope.project, scope.project_copy);
+        scope.$apply();
+      })
+    }
+  }
+});
+
+projectDirectives.directive('projectStoriesPanel', function () {
+  return {
+    restrict: 'AE',
+    scope: {project: '=', stories: '=', new_story: '=newStory', flags: '=', tags: '='},
+    templateUrl: "<%= asset_path('teamwork/projects/project_stories_panel.html') %>",
+    link: function (scope, el) {
+      var setup_select2_tags = function () {
+        var tags = [];
+
+        scope.tags.forEach(function (element) {
+          tags.push({id: element.id, text: element.name});
+        });
+
+        el.find('.js-story-tags').select2({
+          tags: tags,
+          multiple: true
+        });
+      };
+
+      var hide_story_form_modal = function () {
+        el.find('#story_form').modal('hide');
+      };
+
+      el.find('#story_form').on('show.bs.modal', function () {
+        scope.$parent.reset_new_story();
+        setup_select2_tags();
+      });
+
+      el.find('.js-datetime-field').datetimepicker();
+
+      el.find('.js-story-plan-start-time').on('dp.change', function () {
+        scope.new_story.plan_start_time = $(this).find('.form-control').val();
+      });
+
+      el.find('.js-story-plan-finish-time').on('dp.change', function () {
+        scope.new_story.plan_finish_time = $(this).find('.form-control').val();
+      });
+
+      scope.$watch(function () {
+        return scope.flags.hide_story_form_modal_flag;
+      }, function (newValue, oldValue) {
+        if (newValue === true) {
+          hide_story_form_modal();
+        }
+      });
+
+      scope.$watch('scope.tags', function (newValue, oldValue) {
+        if (newValue === true) {
+          setup_select2_tags();
+        }
+      });
+    }
+  }
+});
+
+projectDirectives.directive('projectMembersPanel', function () {
+  return {
+    restrict: 'AE',
+    scope: {
+      project: '=',
+      members: '=',
+      users: '=',
+      new_members: '=newMembers',
+      add_this_user: '&addThisUser',
+      add_members: '&addMembers',
+      remove_member: '&removeMember'
+    },
+    templateUrl: "<%= asset_path('teamwork/projects/project_members_panel.html') %>",
+    link: function (scope, el) {
+      el.find('#user_list').on('hidden.bs.modal', function () {
+        scope.new_members.length = 0;
+        el.find('.js-add-new-member').prop('checked', false)
+      });
+    }
   }
 });

@@ -10,16 +10,21 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require "select2-ng/select2"
+ *= require "select2-ng/select2-bootstrap"
  *= require_tree .
  *= require_self
  */
 $icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
 @import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass/assets/stylesheets/bootstrap";
+@import "bootstrap3-datetimepicker/build/css/bootstrap-datetimepicker";
 
+$colors: #FC797A, #2ABB9B, #6EB6E5, #FF9672, #68E9AB, #1F8DD6, #FBB44C;
 
 label.required:after {
   content: " *";
+  color: red;
 }
 
 .error-msg {
@@ -53,4 +58,69 @@ label.required:after {
   &:hover {
     text-decoration: none;
   }
+}
+
+.breadcrumb--tight {
+  margin-bottom: -10px;
+  background-color: #fff;
+}
+
+.btn-project-delete {
+  margin-top: 20px;
+}
+
+.datetime-field {
+  padding: 0 15px !important;
+}
+
+.story-row {
+  cursor: pointer;
+}
+
+.story-row-action {
+  width: 21%;
+}
+
+.table-tight {
+  margin-bottom: 0;
+}
+
+.story-tag {
+  padding: 0 5px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+@for $i from 1 through 7 {
+  .story-tag:nth-child(#{7}n+#{$i}) {
+    background-color: nth($colors, $i);
+  }
+}
+
+.member-collection {
+  margin: 5px;
+}
+
+.member-collection__row {
+  line-height: 40px;
+
+  &:hover {
+    .member-collection__row__remove {
+      display: inline;
+    }
+  }
+}
+
+.member-collection__row__remove {
+  position: absolute;
+  top: -6px;
+  left: 6px;
+  color: red;
+  font-size: large;
+  display: none;
+}
+
+.member-name-label {
+  font-size: large;
 }

@@ -1,0 +1,27 @@
+<div class="row">
+  <ol class="breadcrumb breadcrumb--tight">
+    <li><a href="#/projects">Projects</a></li>
+    <li class="active"><a href="#/projects/{{project.id}}">{{project.name}}</a></li>
+  </ol>
+</div>
+
+<div class="clearfix">
+  <h3 class="pull-left">{{project.name}}</h3>
+  <a href="" class="btn btn-danger btn-sm btn-project-delete pull-right" ng-click="delete_project()">Delete</a>
+</div>
+
+<div ng-hide="hide_info">
+  <project-details-panel project="project" project_copy="project_copy" update_project="update_project()"></project-details-panel>
+</div>
+<div ng-hide="hide_stories">
+  <project-stories-panel project="project" stories="stories" new_story="new_story" flags="flags" tags="tags"></project-stories-panel>
+</div>
+<div ng-hide="hide_members">
+  <project-members-panel project="project"
+                         members="members"
+                         users="users"
+                         new_members="new_members"
+                         remove_member="remove_member(member)"
+                         add_this_user="add_this_user(id)"
+                         add_members="add_members()"></project-members-panel>
+</div>

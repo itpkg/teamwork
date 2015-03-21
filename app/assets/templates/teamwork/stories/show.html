@@ -1,0 +1,19 @@
+<div class="row">
+  <ol class="breadcrumb breadcrumb--tight">
+    <li><a href="#/projects">Projects</a></li>
+    <li><a href="#/projects/{{story.project.id}}">{{story.project.name}}</a></li>
+    <li class="active">{{story.title}}</li>
+  </ol>
+</div>
+
+<div class="clearfix">
+  <h3 class="pull-left">{{story.title}}</h3>
+  <a href="" class="btn btn-danger btn-sm btn-project-delete pull-right" ng-click="delete_story()">Delete</a>
+</div>
+
+<story-details-section story="story" story_for_edit="story_for_edit" update="update_story()"></story-details-section>
+
+<story-comments-section story="story"
+                        new_comment="new_comment"
+                        add_comment="add_comment()"
+                        flags="flags"></story-comments-section>

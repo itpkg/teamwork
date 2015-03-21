@@ -11,9 +11,16 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery
-//= require jquery-ujs/src/rails
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require angular/angular
 //= require angular-route/angular-route
 //= require angular-animate/angular-animate
+//= require angular-sanitize/angular-sanitize
+//= require angular-translate/angular-translate
+//= require angular-cookies/angular-cookies
+//= require angular-translate-storage-cookie/angular-translate-storage-cookie
+//= require angular-devise/lib/devise
+//= require moment/moment.js
+//= require bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker.js
+//= require select2-ng/select2
 //= require_tree .

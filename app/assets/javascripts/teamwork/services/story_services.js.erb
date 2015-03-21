@@ -1,0 +1,37 @@
+'use strict';
+
+<% url_helpers = Teamwork::Engine.routes.url_helpers %>
+
+var storyServices = angular.module('StoryServices', []);
+
+storyServices.factory('storyFactory', ['$http',
+  function ($http) {
+    var storyFactory = {};
+
+    storyFactory.get_story = function (story_id) {
+      return $http.get("<%= url_helpers.story_path('story_id') %>".replace('story_id', story_id));
+    };
+
+    storyFactory.create_story = function (story) {
+      return $http.post("<%= url_helpers.stories_path %>", {story: story});
+    };
+
+    storyFactory.update_story = function (story) {
+      return $http.patch("<%= url_helpers.stories_path('story_id') %>".replace('.story_id', '/'+ story.id), {story: story});
+    };
+
+    storyFactory.delete_story = function (story) {
+      return $http.delete("<%= url_helpers.story_path('story_id') %>".replace('story_id', story.id));
+    };
+
+    storyFactory.update_story_status = function (story, status) {
+      return $http.patch("<%= url_helpers.story_update_story_status_path('story_id') %>".replace('story_id', story.id), {status: status});
+    };
+
+    storyFactory.add_comment = function (comment) {
+      return $http.patch("<%= url_helpers.story_add_comment_path('story_id') %>".replace('story_id', comment.story_id), comment);
+    };
+
+    return storyFactory;
+  }
+]);

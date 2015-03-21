@@ -8,19 +8,67 @@ module Teamwork
       render json: projects.map(&:general_info)
     end
 
+    def show
+      project = Teamwork::Project.includes(:stories, :tags).where(id: params[:id], active: true).first
+      members = User.with_role(:member, project)
+
+      render json: {
+               project: project,
+               stories: project.stories.where(active: true).order(:id),
+               members: members,
+               users: User.where.not(id: members.map(&:id)).order(:first_name),
+               tags: project.tags
+             }
+    end
+
+    def tags
+      render json: {tags: Teamwork::Tag.where(project_id: params[:project_id])}
+    end
+
     def create
-      if Project.create(project_params)
-        status = :ok
-      else
-        status = :error
+      project = Project.create(project_params)
+
+      render json: {project: project}
+    end
+
+    def update
+      id = project_params.delete(:id)
+
+      project = Project.find(id)
+      project.update(project_params)
+
+      render json: {status: :ok}
+    end
+
+    def destroy
+      Project.find(params[:id]).destroy
+
+      render json: {status: :ok}
+    end
+
+    def add_members
+      project = Project.find(params[:project_id])
+      users   = User.where(id: params[:user_ids])
+
+      users.each do |u|
+        u.add_role :member, project
       end
 
-      render json: {status: status}
+      render json: {status: :ok}
+    end
+
+    def remove_member
+      project = Project.find(params[:project_id])
+      user    = User.find(params[:user_id])
+
+      user.remove_role :member, project
+
+      render json: {status: :ok}
     end
 
     private
     def project_params
-      params.require(:project).permit(:name, :description)
+      params.require(:project).permit(:id, :name, :description, :status)
     end
   end
 end
