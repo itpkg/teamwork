@@ -1,9 +1,0 @@
-zh-CN:
-  helpers:
-    xls_file:
-      name: '文件名'
-  teamwork:
-    helpers:
-      project:
-        title: '项目管理'
-        body: '项目管理内容'

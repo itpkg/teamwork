@@ -1,9 +1,0 @@
-en:
-  helpers:
-    xls_file:
-      name: 'File name'
-  teamwork:
-    helpers:
-      project:
-        title: 'Project title'
-        body: 'Project description'
