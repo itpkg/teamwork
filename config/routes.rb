@@ -13,4 +13,5 @@ Teamwork::Engine.routes.draw do
 
   end
 
+  %w(sitemap rss).each { |a| get a => "home##{a}", constraints: {format: 'xml'} }
 end
