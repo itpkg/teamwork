@@ -1,5 +1,6 @@
 module Teamwork
   class Project < ActiveRecord::Base
+    resourcify
     include Concerns::FakeDestroy
 
     has_many :stories, class_name: 'Teamwork::Story'
