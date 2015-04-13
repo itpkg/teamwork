@@ -2,18 +2,18 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class="row">
-        <div class="col-xs-8"><a href="#">{{project.name}}</a></div>
+        <div class="col-xs-8"><a href="#/projects/{{project.id}}">{{project.name}}</a></div>
         <div class="col-xs-4 text-right">
-          <a href="#" class="decoration-less-link js-tooltip-el"
+          <a href="#/projects/{{project.id}}?hide_info=true&hide_members=true" class="decoration-less-link js-tooltip-el"
              data-toggle="tooltip" data-placement="bottom" title="stories">
             <span class="glyphicon glyphicon-folder-close"></span>
           </a>
-          <a href="#" class="decoration-less-link js-tooltip-el"
+          <a href="#/projects/{{project.id}}?hide_info=true&hide_stories=true" class="decoration-less-link js-tooltip-el"
              data-toggle="tooltip" data-placement="bottom" title="users">
             <span class="glyphicon glyphicon-user"></span>
           </a>
-          <a href="#" class="decoration-less-link js-tooltip-el"
-             data-toggle="tooltip" data-placement="bottom" title="settings">
+          <a href="#/projects/{{project.id}}?hide_stories=true&hide_members=true" class="decoration-less-link js-tooltip-el"
+             data-toggle="tooltip" data-placement="bottom" title="edit">
             <span class="glyphicon glyphicon-cog"></span>
           </a>
         </div>

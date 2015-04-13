@@ -14,6 +14,7 @@ module Teamwork
 
     def general_info
       {
+        id: id,
         name: name,
         description: description,
         stories: stories.count,

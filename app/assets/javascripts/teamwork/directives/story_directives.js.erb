@@ -1,0 +1,76 @@
+'use strict';
+
+var storyDirectives = angular.module('StoryDirectives', []);
+
+storyDirectives.directive('storyStatusUpdateButtons', function () {
+  return {
+    restrict: 'AE',
+    scope: {story: '=', update: '&'},
+    templateUrl: "<%= asset_path('teamwork/stories/story_status_update_buttons.html') %>"
+  }
+});
+
+storyDirectives.directive('storyDetailsSection', function () {
+  return {
+    restrict: 'AE',
+    scope: {
+      story:          '=',
+      story_for_edit: '=storyForEdit',
+      update:         '&'
+    },
+    templateUrl: "<%= asset_path('teamwork/stories/story_details_section.html') %>",
+    link: function (scope, el) {
+      var setup_select2_tags = function () {
+        el.find('.js-story-tags').select2({
+          tags: scope.story.project_tags,
+          multiple: true
+        });
+      };
+
+      el.find('#story_form').on('show.bs.modal', function () {
+        scope.$parent.sync_story_for_edit();
+        setup_select2_tags();
+      });
+
+      el.find('.js-datetime-field').datetimepicker();
+      el.find('.js-story-plan-start-time').on('dp.change', function () {
+        scope.story_for_edit.plan_start_time = $(this).find('.form-control').val();
+      });
+
+      el.find('.js-story-plan-finish-time').on('dp.change', function () {
+        scope.story_for_edit.plan_finish_time = $(this).find('.form-control').val();
+      });
+
+      scope.$watch('scope.story', scope.$parent.sync_story_for_edit());
+
+      scope.$watch('scope.story.project_tags', function (newValue) {
+        if (newValue === true) {
+          setup_select2_tags();
+        }
+      });
+    }
+  }
+});
+
+storyDirectives.directive('storyCommentsSection', function () {
+  return {
+    restrict: 'AE',
+    scope: {
+      story:       '=',
+      new_comment: '=newComment',
+      flags:       '=',
+      add_comment: '&addComment'
+    },
+    templateUrl: "<%= asset_path('teamwork/stories/story_comments_section.html') %>",
+    link: function (scope, el) {
+      el.find('#comment_form').on('hidden.bs.modal', function () {
+        scope.new_comment.content = '';
+        scope.new_comment.new_progress = scope.story.progress;
+        scope.flags.comment_error = false;
+        scope.flags.invalid_story_progress = false;
+        scope.flags.blank_comment = false;
+        scope.$apply();
+      });
+    }
+  }
+});

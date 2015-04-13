@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>" ng-app="TeamworkEngine">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Teamwork</title>
-    <%= stylesheet_link_tag 'teamwork/application', media: 'all' %>
-    <script type='text/javascript'>
-        var gl_lang = "<%= I18n.locale %>";
-    </script>
-    <%= javascript_include_tag 'teamwork/application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -19,9 +18,18 @@
             <%= yield %>
           </div>
 
-          <%= render partial: 'layouts/teamwork/footer' %>
+          <!-- TODO: add footer -->
+          <%#= render partial: 'layouts/footer' %>
         </div>
       </div>
     </div>
+
+    <%= stylesheet_link_tag 'teamwork/application', media: 'all' %>
+    <%= javascript_include_tag 'teamwork/application' %>
+
+    <!--[if IE 9]>
+      <%= javascript_include_tag 'html5shiv/dist/html5shiv', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'respond/dest/respond', 'data-turbolinks-track' => true %>
+    <![endif]-->
   </body>
 </html>

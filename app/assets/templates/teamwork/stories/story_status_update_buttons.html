@@ -1,0 +1,22 @@
+<button class="btn btn-default btn-sm" ng-show="story.status == 'submit'"
+        ng-click="update({story: story, status: 1})">start
+</button>
+
+<button class="btn btn-primary btn-sm" ng-show="story.status == 'processing'"
+        ng-click="update({story: story, status: 2})">Finish
+</button>
+
+<div class="btn-group" ng-show="story.status == 'finish'">
+  <button class="btn btn-warning btn-sm"
+          ng-click="update({story: story, status: 3})">Reject
+  </button>
+  <button class="btn btn-info btn-sm"
+          ng-click="update({story: story, status: 9})">Accept
+  </button>
+</div>
+
+<button class="btn btn-danger btn-sm" ng-show="story.status == 'reject'"
+        ng-click="update({story: story, status: 1})">Restart
+</button>
+
+<button class="btn btn-success btn-sm" ng-show="story.status == 'done'" disabled="disabled">Done</button>

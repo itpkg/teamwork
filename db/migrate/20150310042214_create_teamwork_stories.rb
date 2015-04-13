@@ -20,8 +20,8 @@ class CreateTeamworkStories < ActiveRecord::Migration
     add_index :teamwork_stories, :title
 
     create_table :teamwork_stories_tags, id: false do |t|
-      t.belongs_to :story_id, index: true
-      t.belongs_to :tag_id, index: true
+      t.belongs_to :story, index: true
+      t.belongs_to :tag, index: true
     end
   end
 end

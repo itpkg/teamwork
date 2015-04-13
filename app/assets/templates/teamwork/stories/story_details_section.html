@@ -1,0 +1,150 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <strong class="panel-title">Story Details</strong>
+    <span class="pull-right">
+      <a href="" data-toggle="modal" data-target="#story_form">edit <span
+              class="glyphicon glyphicon-pencil"></span></a>
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Title:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Title:</strong></div>
+      <div class="col-sm-9">{{story.title}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Points:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Points:</strong></div>
+      <div class="col-sm-9">{{story.point}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Status:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Status:</strong></div>
+      <div class="col-sm-9">{{story.status}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Progress:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Progress:</strong></div>
+      <div class="col-sm-9">{{story.progress}}%</div>
+    </div>
+
+    <!-- TODO add owner to the story -->
+    <!--<div class="row">-->
+      <!--<div class="col-sm-3 text-right hidden-xs"><strong>Owner:</strong></div>-->
+      <!--<div class="col-xs-12 visible-xs"><strong>Owner:</strong></div>-->
+      <!--<div class="col-sm-9">{{story.owner | handle_null}}</div>-->
+    <!--</div>-->
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Planned Start Time:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Planned Start Time:</strong></div>
+      <div class="col-sm-9">{{story.plan_start_time}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Planned Finish Time:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Planned Finish Time:</strong></div>
+      <div class="col-sm-9">{{story.plan_finish_time}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Tags:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Tags:</strong></div>
+      <div class="col-sm-9">
+        <span class='story-tag' ng-repeat="tag in story.story_tags">{{tag.name}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Description:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Description:</strong></div>
+      <div class="col-sm-9">{{story.description | handle_null}}</div>
+    </div>
+  </div>
+</div>
+
+<div id="story_form" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Story</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required" for="title">Title</label>
+
+              <div class="col-sm-8">
+                <input id="title" class="form-control" type="text" ng-model="story_for_edit.title" required/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="point">Points</label>
+
+              <div class="col-sm-8">
+                <select id="point" class="form-control" ng-model="story_for_edit.point">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="tags">Tags</label>
+
+              <div class="col-sm-8">
+                <input id="tags" class="form-control js-story-tags" type="text" ng-model="story_for_edit.tags"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="plan_start_time">Planned Start Time</label>
+
+              <div class="col-sm-8 input-group date datetime-field js-datetime-field js-story-plan-start-time">
+                <input id="plan_start_time" class="form-control" ng-model="story_for_edit.plan_start_time"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="plan_finish_time">Planned Finish Time</label>
+
+              <div class="col-sm-8 input-group date datetime-field js-datetime-field js-story-plan-finish-time">
+                <input id="plan_finish_time" class="form-control" ng-model="story_for_edit.plan_finish_time"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="description">Description</label>
+
+              <div class="col-sm-8">
+                    <textarea id="description" class="form-control" rows="5"
+                              ng-model="story_for_edit.description"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="update()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,28 +2,43 @@
 
 /* Teamwork Module */
 
-var teamworkEngine = angular.module('teamworkEngine', [
+var teamworkEngine = angular.module('TeamworkEngine', [
   'ngRoute',
 
   'ProjectControllers',
+  'StoryControllers',
+
   'ProjectDirectives',
-  'ProjectServices'
+  'StoryDirectives',
+
+  'ProjectServices',
+  'StoryServices',
+
+  'Filters'
 ]);
 
 teamworkEngine.config(['$routeProvider', '$locationProvider',
   function ($routeProvider) {
     $routeProvider.
       when('/projects', {
-        templateUrl: "<%= asset_path('teamwork/projects/projects.html') %> ",
+        templateUrl: "<%= asset_path('teamwork/projects/index.html') %> ",
         controller: 'ProjectsIndexCtl'
       }).
       when('/projects-all', {
-        templateUrl: "<%= asset_path('teamwork/projects/projects_all.html') %> ",
-        controller: 'ProjectsAllCtl'
+        templateUrl: "<%= asset_path('teamwork/projects/list.html') %> ",
+        controller: 'ProjectsListCtl'
       }).
       when('/projects/new', {
         templateUrl: "<%= asset_path('teamwork/projects/new.html') %> ",
         controller: 'ProjectsNewCtl'
+      }).
+      when('/projects/:id', {
+        templateUrl: "<%= asset_path('teamwork/projects/show.html') %> ",
+        controller: 'ProjectsShowCtl'
+      }).
+      when('/stories/:id', {
+        templateUrl: "<%= asset_path('teamwork/stories/show.html') %> ",
+        controller: 'StoriesShowCtl'
       }).
       otherwise({
         redirectTo: '/projects'

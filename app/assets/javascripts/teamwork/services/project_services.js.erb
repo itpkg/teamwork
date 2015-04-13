@@ -9,11 +9,35 @@ projectServices.factory('projectFactory', ['$http',
     var projectFactory = {};
 
     projectFactory.projects = function () {
-      return $http.get("<%= url_helpers.projects_path(locale: 'en') %>");
+      return $http.get("<%= url_helpers.projects_path %>");
     };
 
     projectFactory.create_project = function (project) {
-      return $http.post("<%= url_helpers.projects_path(locale: 'en') %>", project);
+      return $http.post("<%= url_helpers.projects_path %>", project);
+    };
+
+    projectFactory.get_project = function (id) {
+      return $http.get("<%= url_helpers.project_path('project_id') %>".replace('project_id', id));
+    };
+
+    projectFactory.get_tags = function (id) {
+      return $http.get("<%= url_helpers.project_tags_path('project_id') %>".replace('project_id', id));
+    };
+
+    projectFactory.update_project = function (project) {
+      return $http.patch("<%= url_helpers.project_path('project_id') %>".replace('project_id', project.id), project);
+    };
+
+    projectFactory.delete_project = function (project) {
+      return $http.delete("<%= url_helpers.project_path('project_id') %>".replace('project_id', project.id));
+    };
+
+    projectFactory.add_members = function (project, users) {
+      return $http.patch("<%= url_helpers.project_add_members_path('project_id') %>".replace('project_id', project.id), {user_ids: users});
+    };
+
+    projectFactory.remove_member = function (project, user) {
+      return $http.patch("<%= url_helpers.project_remove_member_path('project_id') %>".replace('project_id', project.id), {user_id: user.id});
     };
 
     return projectFactory;
