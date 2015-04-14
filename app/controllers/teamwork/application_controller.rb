@@ -11,7 +11,7 @@ module Teamwork
     end
 
     def check_session
-      redirect_to main_app.new_user_session_path unless user_signed_in?
+      redirect_to '#/users/sign_in' unless user_signed_in?
     end
   end
 end
