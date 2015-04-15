@@ -28,7 +28,14 @@
     <div class="row">
       <div class="col-sm-3 text-right hidden-xs"><strong>Progress:</strong></div>
       <div class="col-xs-12 visible-xs"><strong>Progress:</strong></div>
-      <div class="col-sm-9">{{story.progress}}%</div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="progress progress--marginless">
+          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{story.progress}}"
+               aria-valuemin="0" aria-valuemax="100" style="width: {{story.progress}}%;">
+            {{story.progress}}%
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- TODO add owner to the story -->
