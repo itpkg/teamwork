@@ -1,0 +1,39 @@
+<div class="row">
+  <ol class="breadcrumb breadcrumb--tight">
+    <li><a href="#/projects">Projects</a></li>
+    <li class="active"><a href="#/projects/{{project.id}}">{{project.name}}</a></li>
+  </ol>
+</div>
+
+<div class="clearfix">
+  <h3>Edit Project</h3>
+  <hr/>
+
+  <form name='form' class="form-horizontal">
+    <div class="form-group" ng-class="{ 'has-error': form.project_name.$invalid }">
+      <label class="col-sm-2 control-label required" for="project_name">Name</label>
+
+      <div class="col-sm-10">
+        <input id="project_name" name="project_name" class="form-control" type="text"
+               ng-model="project_for_edit.name" required />
+        <div class="error-msg" ng-show="form.project_name.$invalid">Project name cannot be blank!</div>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.project_description.$invalid }">
+      <label class="col-sm-2 control-label required" for="project_description">Description</label>
+
+      <div class="col-sm-10">
+        <textarea id="project_description" name="project_description" class="form-control" rows="5"
+                  ng-model="project_for_edit.description" required></textarea>
+        <div class="error-msg" ng-show="form.project_description.$invalid">Project description cannot be blank!</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <a href="#/projects/{{project.id}}" class="btn btn-default">Cancel</a>
+        <a href="" class="btn btn-primary" ng-click="update_project()" ng-disabled="form.$invalid">Update</a>
+      </div>
+    </div>
+  </form>
+</div>

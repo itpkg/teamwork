@@ -146,3 +146,17 @@ projectControllers.controller('ProjectsShowCtl', ['$scope', '$routeParams', '$wi
       }
     };
   }]);
+
+projectControllers.controller('ProjectsEditCtl', ['$scope', '$routeParams', '$location', 'projectFactory',
+  function ($scope, $routeParams, $location, projectFactory) {
+    projectFactory.get_project($routeParams.id).success(function (data) {
+      $scope.project = data.project;
+      $scope.project_for_edit = angular.copy($scope.project)
+    });
+
+    $scope.update_project = function () {
+      projectFactory.update_project($scope.project_for_edit).success(function () {
+        $location.path('/projects/' + $scope.project.id).search();
+      });
+    };
+  }]);

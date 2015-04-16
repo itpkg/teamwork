@@ -96,6 +96,10 @@ label.required:after {
   .story-tag:nth-child(#{7}n+#{$i}) {
     background-color: nth($colors, $i);
   }
+
+  .select2-search-choice:nth-child(#{7}n-#{$i}) {
+    background: nth($colors, $i) none !important;;
+  }
 }
 
 .member-collection {
