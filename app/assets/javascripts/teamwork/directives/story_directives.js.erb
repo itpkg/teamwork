@@ -15,7 +15,6 @@ storyDirectives.directive('storyDetailsSection', function () {
     restrict: 'AE',
     scope: {
       story:          '=',
-      story_for_edit: '=storyForEdit',
       update:         '&'
     },
     templateUrl: "<%= asset_path('teamwork/stories/story_details_section.html') %>",
@@ -28,7 +27,8 @@ storyDirectives.directive('storyDetailsSection', function () {
       };
 
       el.find('#story_form').on('show.bs.modal', function () {
-        scope.$parent.sync_story_for_edit();
+        scope.story_for_edit = angular.copy(scope.story);
+        scope.$apply();
         setup_select2_tags();
       });
 
@@ -40,8 +40,6 @@ storyDirectives.directive('storyDetailsSection', function () {
       el.find('.js-story-plan-finish-time').on('dp.change', function () {
         scope.story_for_edit.plan_finish_time = $(this).find('.form-control').val();
       });
-
-      scope.$watch('scope.story', scope.$parent.sync_story_for_edit());
 
       scope.$watch('scope.story.project_tags', function (newValue) {
         if (newValue === true) {
