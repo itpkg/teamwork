@@ -3,8 +3,8 @@ module Teamwork
     resourcify
     include Concerns::FakeDestroy
 
-    has_many :stories, class_name: 'Teamwork::Story'
-    has_many :tags,    class_name: 'Teamwork::Tag'
+    has_many :stories, class_name: 'Teamwork::Story', dependent: :destroy
+    has_many :tags,    class_name: 'Teamwork::Tag', dependent: :destroy
 
     scope :active_projects, -> { where(active: true) }
 
