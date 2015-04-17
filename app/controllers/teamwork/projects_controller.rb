@@ -16,7 +16,7 @@ module Teamwork
       render json: {
                project: project,
                stories: project.stories.where(active: true).order(:id),
-               members: members,
+               members: members - User.with_role(:creator, project),
                users: users,
                tags: project.tags
              }
@@ -29,6 +29,7 @@ module Teamwork
     def create
       project = Project.create(project_params)
       current_user.add_role :member, project
+      current_user.add_role :creator, project
 
       render json: {project: project}
     end

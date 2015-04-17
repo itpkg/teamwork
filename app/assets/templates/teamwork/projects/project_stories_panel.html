@@ -33,7 +33,14 @@
                 <td class="span2"><a href="#/stories/{{story.id}}">{{story.title}}</a></td>
                 <td>{{story.point}}</td>
                 <td>{{story.status}}</td>
-                <td>{{story.progress}}%</td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{story.progress}}" aria-valuemin="0"
+                         aria-valuemax="100" style="width: {{story.progress}}%;">
+                      {{story.progress}}%
+                    </div>
+                  </div>
+                </td>
                 <!-- TODO add owner -->
                 <!--<td>{{story.owner.name | handle_null}}</td>-->
                 <td class="story-row-action">
