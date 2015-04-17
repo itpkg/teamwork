@@ -57,7 +57,8 @@ storyDirectives.directive('storyCommentsSection', function () {
       story:       '=',
       new_comment: '=newComment',
       flags:       '=',
-      add_comment: '&addComment'
+      add_comment: '&addComment',
+      delete_comment: '&deleteComment'
     },
     templateUrl: "<%= asset_path('teamwork/stories/story_comments_section.html') %>",
     link: function (scope, el) {

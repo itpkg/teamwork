@@ -145,4 +145,14 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
         $window.location.reload();
       });
     };
+
+    $scope.delete_comment = function (comment) {
+      if (confirm('Are you sure to delete this comment?')) {
+        storyFactory.delete_comment(comment).success(function () {
+          var index = $scope.story.comments.indexOf(comment);
+          $scope.story.comments.splice(index, 1);
+        });
+
+      }
+    };
   }]);

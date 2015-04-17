@@ -13,13 +13,23 @@
       </div>
     </div>
     <div ng-hide="story.comments.length === 0">
-      <ul>
-        <li ng-repeat="comment in story.comments">
-          <div><i>{{comment.content}}</i></div>
-          <div><span class="pull-right">{{comment.created_at | date_time}}</span></div>
+      <div ng-repeat="comment in story.comments">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-10">
+              <div><i>{{comment.content}}</i></div>
+              <div><span class="pull-right">{{comment.created_at | date_time}}</span></div>
+            </div>
+            <div class="col-sm-2 text-right">
+              <div class="btn-group btn-group-xs" role="group">
+                <button type="button" class="btn btn-info" ng-click="">Edit</button>
+                <button type="button" class="btn btn-danger" ng-click="delete_comment({comment: comment})">Delete</button>
+              </div>
+            </div>
+          </div>
           <hr>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

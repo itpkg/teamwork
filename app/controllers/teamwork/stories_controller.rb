@@ -10,8 +10,13 @@ module Teamwork
       story_tags   = story.tags.map { |t| {id: t.id, name: t.name} }
       project_tags = Tag.project_tags(story.project_id)
 
-      render json: {story: story, project: story.project, comments: story.comments.order(created_at: :desc),
-                    tags: story_tags, project_tags: project_tags}
+      render json: {
+               story: story,
+               project: story.project,
+               comments: story.comments.where(active: true).order(created_at: :desc),
+               tags: story_tags,
+               project_tags: project_tags
+             }
     end
 
     def create
@@ -43,6 +48,12 @@ module Teamwork
 
       story.update(progress: params[:new_progress])
       story.comments.create(content: params[:content])
+
+      render json: {status: :ok}
+    end
+
+    def delete_comment
+      Comment.find(params[:id]).destroy
 
       render json: {status: :ok}
     end
