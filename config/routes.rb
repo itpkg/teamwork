@@ -10,6 +10,7 @@ Teamwork::Engine.routes.draw do
   resources :stories do
     patch  :update_story_status, to: 'stories#update_story_status'
     patch  :add_comment,         to: 'stories#add_comment'
+    patch  'update_comment/:id', to: 'stories#update_comment', as: :update_comment
     delete 'delete_comment/:id', to: 'stories#delete_comment', as: :delete_comment
   end
   resources :tags

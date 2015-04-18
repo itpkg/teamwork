@@ -52,6 +52,15 @@ module Teamwork
       render json: {status: :ok}
     end
 
+    def update_comment
+      comment = Comment.find(params[:id])
+      comment.update(comment_params)
+
+      comment.story.update(story_params)
+
+      render json: {status: :ok}
+    end
+
     def delete_comment
       Comment.find(params[:id]).destroy
 
@@ -68,6 +77,10 @@ module Teamwork
     def story_params
       params.require(:story).permit(:title, :point, :flag, :tags, :progress, :status, :plan_start_time, :plan_finish_time,
                                     :real_start_time, :real_finish_time, :description, :project_id, tags: [])
+    end
+
+    def comment_params
+      params.require(:comment).permit(:content)
     end
 
     def process_tags(tags)

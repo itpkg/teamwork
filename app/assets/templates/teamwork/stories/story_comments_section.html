@@ -22,8 +22,13 @@
             </div>
             <div class="col-sm-2 text-right">
               <div class="btn-group btn-group-xs" role="group">
-                <button type="button" class="btn btn-info" ng-click="">Edit</button>
-                <button type="button" class="btn btn-danger" ng-click="delete_comment({comment: comment})">Delete</button>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#comment_edit_form"
+                        ng-click="init_comment_for_edit(comment)">
+                  Edit
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="delete_comment({comment: comment})">
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -76,6 +81,59 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="add_comment()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="comment_edit_form" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Comment</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <form name="form" class="form-horizontal">
+              <div class="alert alert-danger" role="alert" ng-show="form.$invalid">
+                <p ng-show="form.story_new_progress.$invalid">Story Progress is invalid, please input a number between 0 and 100.</p>
+                <p ng-show="form.comment_content.$invalid">Comment content cannot be blank!</p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-error': form.story_new_progress.$invalid }">
+                <label for="story_progress" class="col-sm-3 col-xs-12 control-label required">Story Progress</label>
+
+                <div class="col-sm-3 col-xs-4">
+                  <div class="input-group">
+                    <input type="number" min="0" max="100" step="10" name="story_new_progress" id="story_new_progress"
+                           class="form-control" ng-model="comment_for_edit.progress" required>
+                    <span class="input-group-addon">%</span>
+                  </div>
+                </div>
+                <div class="clearfix visible-xs-block"></div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': form.comment_content.$invalid }">
+                <label for="comment_content" class="col-sm-3 control-label required">Comment</label>
+
+                <div class="col-sm-9">
+                  <textarea type="text" name="comment_content" id="comment_content" class="form-control" rows="5"
+                            ng-model="comment_for_edit.content" required>
+                  </textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="update_comment({comment: comment_for_edit})"
+                ng-disabled="form.$invalid">
+          Update
+        </button>
       </div>
     </div>
   </div>

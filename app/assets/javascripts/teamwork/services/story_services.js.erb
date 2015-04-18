@@ -32,6 +32,13 @@ storyServices.factory('storyFactory', ['$http',
       return $http.patch("<%= url_helpers.story_add_comment_path('story_id') %>".replace('story_id', comment.story_id), comment);
     };
 
+    storyFactory.update_comment = function (comment) {
+      return $http.patch(
+              "<%= url_helpers.story_update_comment_path('story_id', 'comment_id') %>".replace('story_id', comment.story_id).replace('comment_id', comment.id),
+              {comment: comment, story: {progress: comment.progress}}
+      );
+    };
+
     storyFactory.delete_comment = function (comment) {
       return $http.delete("<%= url_helpers.story_delete_comment_path('story_id', 'comment_id') %>".replace('story_id', comment.story_id).replace('comment_id', comment.id));
     };

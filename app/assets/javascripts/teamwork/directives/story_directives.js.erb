@@ -58,6 +58,7 @@ storyDirectives.directive('storyCommentsSection', function () {
       new_comment: '=newComment',
       flags:       '=',
       add_comment: '&addComment',
+      update_comment: '&updateComment',
       delete_comment: '&deleteComment'
     },
     templateUrl: "<%= asset_path('teamwork/stories/story_comments_section.html') %>",
@@ -70,6 +71,11 @@ storyDirectives.directive('storyCommentsSection', function () {
         scope.flags.blank_comment = false;
         scope.$apply();
       });
+
+      scope.init_comment_for_edit = function (comment) {
+        scope.comment_for_edit = angular.copy(comment);
+        scope.comment_for_edit.progress = scope.story.progress;
+      }
     }
   }
 });

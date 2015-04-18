@@ -52,8 +52,8 @@ storyControllers.controller('ProjectStoriesCtl', ['$scope', 'storyFactory',
     };
   }]);
 
-storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$window', '$location', 'storyFactory',
-  function ($scope, $routeParams, $window, $location, storyFactory) {
+storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$window', '$location', '$filter', 'storyFactory',
+  function ($scope, $routeParams, $window, $location, $filter, storyFactory) {
     $scope.flags = {
       comment_error: false,
       invalid_story_progress: false,
@@ -146,13 +146,23 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
       });
     };
 
+    $scope.update_comment = function (comment) {
+      storyFactory.update_comment(comment).success(function () {
+        //$scope.story.progress = comment.progress;
+        //
+        //var updated_comment = $filter('filter')($scope.story.comments, {id: comment.id}, true)[0];
+        //updated_comment.content = comment.content;
+
+        $window.location.reload();
+      });
+    };
+
     $scope.delete_comment = function (comment) {
       if (confirm('Are you sure to delete this comment?')) {
         storyFactory.delete_comment(comment).success(function () {
           var index = $scope.story.comments.indexOf(comment);
           $scope.story.comments.splice(index, 1);
         });
-
       }
     };
   }]);
