@@ -3,7 +3,7 @@ module Teamwork
     include Concerns::FakeDestroy
 
     belongs_to :project,  class_name: 'Teamwork::Project'
-    has_many   :comments, class_name: 'Teamwork::Comment'
+    has_many   :comments, class_name: 'Teamwork::Comment', dependent: :destroy
 
     has_and_belongs_to_many :tags, class_name: 'Teamwork::Tag'
 

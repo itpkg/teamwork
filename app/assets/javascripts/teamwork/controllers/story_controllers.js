@@ -52,8 +52,8 @@ storyControllers.controller('ProjectStoriesCtl', ['$scope', 'storyFactory',
     };
   }]);
 
-storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$window', '$location', 'storyFactory',
-  function ($scope, $routeParams, $window, $location, storyFactory) {
+storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$window', '$location', '$filter', 'storyFactory',
+  function ($scope, $routeParams, $window, $location, $filter, storyFactory) {
     $scope.flags = {
       comment_error: false,
       invalid_story_progress: false,
@@ -79,11 +79,6 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
       });
     };
 
-    $scope.sync_story_for_edit = function () {
-      $scope.story_for_edit = angular.copy($scope.story);
-      $scope.$apply();
-    };
-
     storyFactory.get_story($routeParams.id).success(function (data) {
       $scope.story              = data.story;
       $scope.story.project      = data.project;
@@ -93,7 +88,6 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
 
       $scope.formatStoryDateTime();
       $scope.formatTags();
-      $scope.sync_story_for_edit();
 
       $scope.new_comment = {
         story_id: $scope.story.id,
@@ -102,18 +96,18 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
       };
     });
 
-    $scope.update_story = function () {
-      delete $scope.story_for_edit['project'];
-      delete $scope.story_for_edit['project_tags'];
-      delete $scope.story_for_edit['story_tags'];
-      delete $scope.story_for_edit['comments'];
+    $scope.update_story = function (story) {
+      delete story['project'];
+      delete story['project_tags'];
+      delete story['story_tags'];
+      delete story['comments'];
 
-      $scope.story_for_edit.plan_start_time  = moment($scope.story_for_edit.plan_start_time).format();
-      $scope.story_for_edit.plan_finish_time = moment($scope.story_for_edit.plan_finish_time).format();
-      $scope.story_for_edit.real_start_time  = moment($scope.story_for_edit.real_start_time).format();
-      $scope.story_for_edit.real_finish_time = moment($scope.story_for_edit.real_finish_time).format();
+      story.plan_start_time  = moment(story.plan_start_time).format();
+      story.plan_finish_time = moment(story.plan_finish_time).format();
+      story.real_start_time  = moment(story.real_start_time).format();
+      story.real_finish_time = moment(story.real_finish_time).format();
 
-      storyFactory.update_story($scope.story_for_edit).success(function () {
+      storyFactory.update_story(story).success(function () {
         $window.location.reload();
       });
     };
@@ -150,5 +144,25 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
       storyFactory.add_comment($scope.new_comment).success(function () {
         $window.location.reload();
       });
+    };
+
+    $scope.update_comment = function (comment) {
+      storyFactory.update_comment(comment).success(function () {
+        //$scope.story.progress = comment.progress;
+        //
+        //var updated_comment = $filter('filter')($scope.story.comments, {id: comment.id}, true)[0];
+        //updated_comment.content = comment.content;
+
+        $window.location.reload();
+      });
+    };
+
+    $scope.delete_comment = function (comment) {
+      if (confirm('Are you sure to delete this comment?')) {
+        storyFactory.delete_comment(comment).success(function () {
+          var index = $scope.story.comments.indexOf(comment);
+          $scope.story.comments.splice(index, 1);
+        });
+      }
     };
   }]);
