@@ -63,8 +63,6 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
     $scope.formatStoryDateTime = function () {
       $scope.story.plan_start_time  = moment($scope.story.plan_start_time).format('L h:mm A');
       $scope.story.plan_finish_time = moment($scope.story.plan_finish_time).format('L h:mm A');
-      $scope.story.real_start_time  = moment($scope.story.real_start_time).format('L h:mm A');
-      $scope.story.real_finish_time = moment($scope.story.real_finish_time).format('L h:mm A');
     };
 
     $scope.formatTags = function () {
@@ -104,8 +102,6 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
 
       story.plan_start_time  = moment(story.plan_start_time).format();
       story.plan_finish_time = moment(story.plan_finish_time).format();
-      story.real_start_time  = moment(story.real_start_time).format();
-      story.real_finish_time = moment(story.real_finish_time).format();
 
       storyFactory.update_story(story).success(function () {
         $window.location.reload();

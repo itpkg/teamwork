@@ -58,6 +58,18 @@
     </div>
 
     <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Real Start Time:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Real Start Time:</strong></div>
+      <div class="col-sm-9">{{story.real_start_time | start_time}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 text-right hidden-xs"><strong>Real Finish Time:</strong></div>
+      <div class="col-xs-12 visible-xs"><strong>Real Finish Time:</strong></div>
+      <div class="col-sm-9">{{story.real_finish_time | finish_time}}</div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-3 text-right hidden-xs"><strong>Tags:</strong></div>
       <div class="col-xs-12 visible-xs"><strong>Tags:</strong></div>
       <div class="col-sm-9">

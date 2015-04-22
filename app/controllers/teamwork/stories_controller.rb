@@ -38,7 +38,7 @@ module Teamwork
     end
 
     def update_story_status
-      Story.find(params[:story_id]).update(status: params[:status])
+      Story.find(params[:story_id]).update_status(params[:status])
 
       render json: {status: :ok}
     end
