@@ -46,9 +46,9 @@ storyControllers.controller('ProjectStoriesCtl', ['$scope', 'storyFactory',
     };
 
     $scope.update_story_status = function (story, status) {
-      story.status = $scope.story_status(status);
-
-      storyFactory.update_story_status(story, status)
+      storyFactory.update_story_status(story, status).success(function () {
+        story.status = $scope.story_status(status);
+      });
     };
   }]);
 
@@ -105,6 +105,37 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
 
       storyFactory.update_story(story).success(function () {
         $window.location.reload();
+      });
+    };
+
+    $scope.story_status = function (status_id) {
+      var status = '';
+
+      switch(status_id) {
+        case 0:
+          status = 'submit';
+          break;
+        case 1:
+          status = 'processing';
+          break;
+        case 2:
+          status = 'finish';
+          break;
+        case 3:
+          status = 'reject';
+          break;
+        case 9:
+          status = 'done';
+          break;
+        default:
+      }
+
+      return status;
+    };
+
+    $scope.update_story_status = function (story, status) {
+      storyFactory.update_story_status(story, status).success(function () {
+        story.status = $scope.story_status(status);
       });
     };
 
