@@ -46,9 +46,9 @@ storyControllers.controller('ProjectStoriesCtl', ['$scope', 'storyFactory',
     };
 
     $scope.update_story_status = function (story, status) {
-      story.status = $scope.story_status(status);
-
-      storyFactory.update_story_status(story, status)
+      storyFactory.update_story_status(story, status).success(function () {
+        story.status = $scope.story_status(status);
+      });
     };
   }]);
 
@@ -63,8 +63,6 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
     $scope.formatStoryDateTime = function () {
       $scope.story.plan_start_time  = moment($scope.story.plan_start_time).format('L h:mm A');
       $scope.story.plan_finish_time = moment($scope.story.plan_finish_time).format('L h:mm A');
-      $scope.story.real_start_time  = moment($scope.story.real_start_time).format('L h:mm A');
-      $scope.story.real_finish_time = moment($scope.story.real_finish_time).format('L h:mm A');
     };
 
     $scope.formatTags = function () {
@@ -104,11 +102,40 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
 
       story.plan_start_time  = moment(story.plan_start_time).format();
       story.plan_finish_time = moment(story.plan_finish_time).format();
-      story.real_start_time  = moment(story.real_start_time).format();
-      story.real_finish_time = moment(story.real_finish_time).format();
 
       storyFactory.update_story(story).success(function () {
         $window.location.reload();
+      });
+    };
+
+    $scope.story_status = function (status_id) {
+      var status = '';
+
+      switch(status_id) {
+        case 0:
+          status = 'submit';
+          break;
+        case 1:
+          status = 'processing';
+          break;
+        case 2:
+          status = 'finish';
+          break;
+        case 3:
+          status = 'reject';
+          break;
+        case 9:
+          status = 'done';
+          break;
+        default:
+      }
+
+      return status;
+    };
+
+    $scope.update_story_status = function (story, status) {
+      storyFactory.update_story_status(story, status).success(function () {
+        story.status = $scope.story_status(status);
       });
     };
 
