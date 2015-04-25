@@ -55,6 +55,7 @@ module Teamwork
 
       users.each do |u|
         u.add_role :member, project
+        ProjectMembershipMailer.inform_join_project(u, project).deliver_now
       end
 
       render json: {status: :ok}
@@ -65,6 +66,7 @@ module Teamwork
       user    = User.find(params[:user_id])
 
       user.remove_role :member, project
+      ProjectMembershipMailer.inform_leave_project(user, project).deliver_now
 
       render json: {status: :ok}
     end
