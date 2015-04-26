@@ -9,11 +9,13 @@ module Teamwork
       story        = Story.includes(:comments, :tags).find(params[:id])
       story_tags   = story.tags.map { |t| {id: t.id, name: t.name} }
       project_tags = Tag.project_tags(story.project_id)
+      comments     = story.comments.includes(:owner).where(active: true).order(created_at: :desc)
 
       render json: {
                story: story,
                project: story.project,
-               comments: story.comments.where(active: true).order(created_at: :desc),
+               owner: story.owner.try(:full_name, I18n.locale),
+               comments: comments.map(&:info_with_owner_name),
                tags: story_tags,
                project_tags: project_tags
              }
@@ -38,23 +40,28 @@ module Teamwork
     end
 
     def update_story_status
-      Story.find(params[:story_id]).update_status(params[:status])
+      story = Story.find(params[:story_id])
+      story.update_status(params[:status], current_user)
 
-      render json: {status: :ok}
+      render json: {
+               owner: story.owner.try(:full_name, I18n.locale),
+               real_start_time: story.real_start_time,
+               real_finish_time: story.real_finish_time,
+             }
     end
 
     def add_comment
       story = Story.find(params[:story_id])
 
       story.update(progress: params[:new_progress])
-      story.comments.create(content: params[:content])
+      story.comments.create(content: params[:content], owner: current_user)
 
       render json: {status: :ok}
     end
 
     def update_comment
       comment = Comment.find(params[:id])
-      comment.update(comment_params)
+      comment.update(comment_params.merge(owner: current_user))
 
       comment.story.update(story_params)
 

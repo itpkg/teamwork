@@ -80,6 +80,7 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
     storyFactory.get_story($routeParams.id).success(function (data) {
       $scope.story              = data.story;
       $scope.story.project      = data.project;
+      $scope.story.owner        = data.owner;
       $scope.story.story_tags   = data.tags;
       $scope.story.project_tags = data.project_tags;
       $scope.story.comments     = data.comments;
@@ -96,6 +97,7 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
 
     $scope.update_story = function (story) {
       delete story['project'];
+      delete story['owner'];
       delete story['project_tags'];
       delete story['story_tags'];
       delete story['comments'];
@@ -134,8 +136,11 @@ storyControllers.controller('StoriesShowCtl', ['$scope', '$routeParams', '$windo
     };
 
     $scope.update_story_status = function (story, status) {
-      storyFactory.update_story_status(story, status).success(function () {
-        story.status = $scope.story_status(status);
+      storyFactory.update_story_status(story, status).success(function (data) {
+        story.status           = $scope.story_status(status);
+        story.owner            = data.owner;
+        story.real_start_time  = data.real_start_time;
+        story.real_finish_time = data.real_finish_time;
       });
     };
 
