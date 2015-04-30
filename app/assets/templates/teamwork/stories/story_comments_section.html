@@ -17,8 +17,8 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-10">
-              <div><i>{{comment.content}}</i></div>
-              <div><span class="pull-right">{{comment.created_at | date_time}}</span></div>
+              <div><strong>{{comment.owner}}: </strong><i>{{comment.content}}</i></div>
+              <div><span class="pull-right">{{comment.updated_at | date_time}}</span></div>
             </div>
             <div class="col-sm-2 text-right">
               <div class="btn-group btn-group-xs" role="group">
