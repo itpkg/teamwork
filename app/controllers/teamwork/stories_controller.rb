@@ -8,8 +8,8 @@ module Teamwork
     def show
       story        = Story.includes(:comments, :tags).find(params[:id])
       story_tags   = story.tags.map { |t| {id: t.id, name: t.name} }
-      project_tags = Tag.project_tags(story.project_id)
-      comments     = story.comments.includes(:owner).where(active: true).order(created_at: :desc)
+      project_tags = story.project.tags
+      comments     = story.comments.where(active: true).order(created_at: :desc)
 
       render json: {
                story: story,
@@ -54,14 +54,15 @@ module Teamwork
       story = Story.find(params[:story_id])
 
       story.update(progress: params[:new_progress])
-      story.comments.create(content: params[:content], owner: current_user)
+      story.comments.create(content: params[:content]).update_owner(current_user)
 
       render json: {status: :ok}
     end
 
     def update_comment
       comment = Comment.find(params[:id])
-      comment.update(comment_params.merge(owner: current_user))
+      comment.update(comment_params)
+      comment.update_owner(current_user)
 
       comment.story.update(story_params)
 
