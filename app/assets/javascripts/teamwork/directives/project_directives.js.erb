@@ -44,7 +44,7 @@ projectDirectives.directive('projectDetailsPanel', function () {
 projectDirectives.directive('projectStoriesPanel', function () {
   return {
     restrict: 'AE',
-    scope: {project: '=', stories: '=', new_story: '=newStory', flags: '=', tags: '='},
+    scope: {project: '=', stories: '=', new_story: '=newStory', story_owners: '=storyOwners', flags: '=', tags: '='},
     templateUrl: "<%= asset_path('teamwork/projects/project_stories_panel.html') %>",
     link: function (scope, el) {
       var setup_select2_tags = function () {

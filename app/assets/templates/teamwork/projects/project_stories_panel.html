@@ -23,8 +23,7 @@
                 <th>Points</th>
                 <th>Status</th>
                 <th>Progress</th>
-                <!-- TODO add owner -->
-                <!--<th>Owner</th>-->
+                <th>Owner</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -41,8 +40,7 @@
                     </div>
                   </div>
                 </td>
-                <!-- TODO add owner -->
-                <!--<td>{{story.owner.name | handle_null}}</td>-->
+                <td>{{story_owners[story.id] | handle_null}}</td>
                 <td class="story-row-action">
                   <story-status-update-buttons story="story"
                                                update="update_story_status(story, status)"></story-status-update-buttons>

@@ -14,7 +14,12 @@
   <project-details-panel project="project" project_copy="project_copy" update_project="update_project()"></project-details-panel>
 </div>
 <div ng-hide="hide_stories">
-  <project-stories-panel project="project" stories="stories" new_story="new_story" flags="flags" tags="tags"></project-stories-panel>
+  <project-stories-panel project="project"
+                         stories="stories"
+                         new_story="new_story"
+                         story_owners="story_owners"
+                         flags="flags"
+                         tags="tags"></project-stories-panel>
 </div>
 <div ng-hide="hide_members">
   <project-members-panel project="project"

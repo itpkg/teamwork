@@ -49,8 +49,12 @@ projectControllers.controller('ProjectsShowCtl', ['$scope', '$routeParams', '$wi
     $scope.hide_stories = $routeParams.hide_stories;
     $scope.hide_members = $routeParams.hide_members;
 
-    $scope.current_datetime = function() {
+    $scope.current_datetime = function () {
       return moment().format('L h:mm A');
+    };
+
+    $scope.a_week_later = function () {
+      return moment().add(7, 'days').format('L h:mm A');
     };
 
     $scope.flags = {
@@ -63,18 +67,19 @@ projectControllers.controller('ProjectsShowCtl', ['$scope', '$routeParams', '$wi
       point: 1,
       tags: '',
       plan_start_time: $scope.current_datetime(),
-      plan_finish_time: $scope.current_datetime(),
+      plan_finish_time: $scope.a_week_later(),
       description: ''
     };
 
     $scope.new_members = [];
 
     projectFactory.get_project($routeParams.id).success(function (data) {
-      $scope.project = data.project;
-      $scope.stories = data.stories;
-      $scope.members = data.members;
-      $scope.users   = data.users;
-      $scope.tags    = data.tags;
+      $scope.project      = data.project;
+      $scope.stories      = data.stories;
+      $scope.story_owners = data.story_owners;
+      $scope.members      = data.members;
+      $scope.users        = data.users;
+      $scope.tags         = data.tags;
       $scope.project_copy = angular.copy($scope.project);
       $scope.new_story.project_id = $scope.project.id;
     });
@@ -91,7 +96,7 @@ projectControllers.controller('ProjectsShowCtl', ['$scope', '$routeParams', '$wi
         point: 1,
         tags: '',
         plan_start_time: $scope.current_datetime(),
-        plan_finish_time: $scope.current_datetime(),
+        plan_finish_time: $scope.a_week_later(),
         description: '',
         project_id: $scope.project.id
       };
