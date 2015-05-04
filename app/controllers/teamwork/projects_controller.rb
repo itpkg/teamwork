@@ -12,10 +12,15 @@ module Teamwork
       project = Teamwork::Project.includes(:stories, :tags).where(id: params[:id], active: true).first
       members = User.with_role(:member, project)
       users   = User.where.not(id: members.map(&:id)).order(:first_name)
+      stories = project.stories.where(active: true).order(:id)
+
+      story_owners = {}
+      stories.each { |s| story_owners.merge!({s.id => s.owner.try(:full_name, I18n.locale)}) }
 
       render json: {
                project: project,
-               stories: project.stories.where(active: true).order(:id),
+               stories: stories,
+               story_owners: story_owners,
                members: members - User.with_role(:creator, project),
                users: users,
                tags: project.tags
